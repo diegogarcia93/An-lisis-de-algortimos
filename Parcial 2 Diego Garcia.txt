@@ -1,0 +1,114 @@
+
+DIEGO FERNANDO GARCIA HERNANDEZ
+
+1. 
+
+  Operación       	    z       	Costo    	Total
+Inicializacion  	algorithm   	 0       	 0
+derecha         	algorithm   	 0      	 0
+derecha          	algorithm   	 0       	 0
+reemplazar (por n)	angorithm   	 4       	 4
+reemplazar (por a)	anaorithm   	 4      	 8
+reemplazar (por l)	analrithm   	 4      	12
+Reemplazar (por y)	analyithm   	 4      	16
+Reemplazar (por s)	analysthm   	 4      	20
+Reemplazar (por i)	analysihm   	 4      	24
+Reemplazar (por s)	analysism   	 4      	28
+eliminar         	analysis     	 2      	30
+
+
+Operación			z		Costo		Total
+Inicializacion 		algorithm		0		0
+derecha			algorithm		0		0
+derecha 		algorithm		0		0
+remplazar (por n)	angorithm		4		4
+remplazar (por a)	anaorithm		4		8
+remplazar (por l)	analrithm		4		12
+remplazar (por y)	analyithm		4		16
+insertar S		analysithm		3		19
+derecha			analysithm		0		19
+insertar S		analysisthm		3		22	
+eliminar		analysishm		2		24
+eliminar		analysism		2		26
+eliminar		analysis		2		28
+
+
+
+2.
+
+Operacion			z		Costo		total
+cadena inicial		algorithm		0		0	
+derecha			algorithm		0		0
+insertar n		anlgorithm		3		3
+insertar a		analgorithm		3		6
+derecha			analgorithm		0		6
+remplazar por y		analyorithm		4		10
+remplazar por s		analysrithm		4		14
+remplazar por i		analysiithm		4		18
+remplazar por s		analysisthm		4		22
+eliminar		analysishm		2		24
+eliminar		analysism		2		26
+eliminar 		analysis		2		28
+
+3.
+
+Se puede calcular la distancia de edicion para las cadenas x e y encontrando la distancia de edicion en subproblemas, 
+por medio de una funcion de costo
+
+		Cxy (i, j) = d (x, y [1 .i]  x [j + 1 .m])
+
+donde, Cxy(i,j) es el costo mínimo de transformar el primer caracter j de x en el primer caracter i  de y.
+Entonces d (x, y) = cxy (n, m). Ahora considere la secuencia de operaciones S = (o1,o2,...,On) que transforma x a y
+con costo C(S)= d(x,y). 
+
+Sea Si la subsecuencia de S que contiene las primera operaciones de S. Sea Zi la cadena axiliar despues de realizar 
+las operaciones de Si, donde Z0 = x Y zK = y.
+
+4.
+
+Se puede encontrar la distancia usando la ecuación
+
+		Cxy (i, j) = d (x, y [1 .i]  x [j + 1 .m])
+
+
+C_xy (i,j)=minf{
+			[0   			si i=0 y j=0]
+			[C_xy (i-1,j-1)		si 1>0 y j>0 y x(i-1)=y(j-1)]
+			[C_xy (i-1,j-1)+4	si i>0 y j>0]
+			[C_xy (i-1,j)+2		si i>0]
+			[C_xy (i,j-1)+3			]
+		}
+
+5.
+
+def distance(cadena1, cadena2):
+  d=dict()
+  for i in range(len(cadena1)+1):
+     d[i]=dict()
+     d[i][0]=i
+  for i in range(len(cadena2)+1):
+     d[0][i] = i
+  for i in range(1, len(cadena1)+1):
+     for j in range(1, len(cadena2)+1):
+        d[i][j] = min(d[i][j-1]+1, d[i-1][j]+1, d[i-1][j-1]+(not cadena1[i-1] == cadena2[j-1]))
+  return d[len(cadena1)][len(cadena2)]
+
+el tiempo de ejecucion de este algortimo es de Ô(mn)
+
+6.
+
+
+a = "software engineering " 
+b = "computer science" 
+sem = 0 
+ 
+if len(a) > len(b): a, b = b, a 
+ 
+ref = b 
+for letra in a: 
+    if letra in b: 
+        sem += 1 
+        b = b.replace(letra, "", 1) 
+ 
+print "'%s' y '%s' difieren en: %i" %(a, ref, len(ref) - sem) 
+
